@@ -17,7 +17,12 @@ from validate_email import validate_email
 
 # Create your views here.
 def to_send_mail(token,email,current_site):
-    return
+    to_email=email
+    from_email=settings.EMAIL_HOST_USER
+    current_site=current_site+'/validation/'
+    current_site=current_site+token+'/'
+    message='Hello, in order to activate your account, click on this link '+current_site
+    send_mail(email_subject,message,from_email,[to_email,])
 
 
 def send_email_passwordchange(token,email,current_site):
@@ -91,19 +96,9 @@ def signup_data(request):
                     all_chars=string.ascii_letters + string.digits
                     random_string=''.join(random.choices(all_chars, k=20))
                     current_site='/'+str(get_current_site(request))
-                    email_subject='Activate your account'
-                    email=request.data['email']
-                    to_email=email
-                    from_email=settings.EMAIL_HOST_USER
-                    current_site=current_site+'/validation/'
-                    current_site=current_site+random_string+'/'
-                    message='Hello, in order to activate your account, click on this link '+current_site
-                    #send_mail(email_subject,message,from_email,[to_email,])
-                    #return Response("Sent email successfully")
                     #to_send_mail(random_string,request.data['email'],current_site)
                     new_validation=user_validation(name=request.data['name'],email=request.data['email'],phone=request.data['phone'],password=request.data['password'],grad_year=request.data['grad_year'],course=request.data['course'],token=random_string)
                     new_validation.save()
-
                     response = {
                         'success' : 'True',
                         'status code' : status.HTTP_200_OK,
