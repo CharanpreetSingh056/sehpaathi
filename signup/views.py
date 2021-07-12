@@ -99,13 +99,13 @@ def signup_data(request):
                     to_send_mail(random_string,request.data['email'],current_site)
                     new_validation=user_validation(name=request.data['name'],email=request.data['email'],phone=request.data['phone'],password=request.data['password'],grad_year=request.data['grad_year'],course=request.data['course'],token=random_string)
                     new_validation.save()
+                    return Response("Reached HEre")
                     response = {
                         'success' : 'True',
                         'status code' : status.HTTP_200_OK,
                         'message': 'Check your E-mail to complete the signup.',
                         }
                     all_to_chck=user_validation.objects.all()
-                    return Response("Reached HEre")
                     serializer=UserValidateSerializer(all_to_chck,many=True)
                     return Response(serializer.data)
 
