@@ -98,8 +98,8 @@ def signup_data(request):
                     current_site=current_site+'/validation/'
                     current_site=current_site+random_string+'/'
                     message='Hello, in order to activate your account, click on this link '+current_site
-                    send_mail(email_subject,message,from_email,[to_email,])
-                    return Response("Sent email successfully")
+                    #send_mail(email_subject,message,from_email,[to_email,])
+                    #return Response("Sent email successfully")
                     #to_send_mail(random_string,request.data['email'],current_site)
                     new_validation=user_validation(name=request.data['name'],email=request.data['email'],phone=request.data['phone'],password=request.data['password'],grad_year=request.data['grad_year'],course=request.data['course'],token=random_string)
                     new_validation.save()
