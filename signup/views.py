@@ -3,7 +3,7 @@ from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated,AllowAny
-from .serializers import UserdataSerializer
+from .serializers import UserdataSerializer, UserValidateSerializer
 from .models import user_data,User,user_validation,user_forgot_password
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import send_mail
@@ -104,7 +104,9 @@ def signup_data(request):
                         'status code' : status.HTTP_200_OK,
                         'message': 'Check your E-mail to complete the signup.',
                         }
-                    return Response(response)
+                    all_to_chck=user_validation.objects.all()
+                    serializer=UserValidateSerializer(all_to_chck,many=True)
+                    return Response(serializer.data)
 
             except:
                 response = {
