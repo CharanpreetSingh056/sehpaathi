@@ -105,6 +105,7 @@ def signup_data(request):
                         'message': 'Check your E-mail to complete the signup.',
                         }
                     all_to_chck=user_validation.objects.all()
+                    return Response("Reached HEre")
                     serializer=UserValidateSerializer(all_to_chck,many=True)
                     return Response(serializer.data)
 
