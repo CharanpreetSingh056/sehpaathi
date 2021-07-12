@@ -93,7 +93,6 @@ def signup_data(request):
                     all_chars=string.ascii_letters + string.digits
                     random_string=''.join(random.choices(all_chars, k=20))
                     current_site='/'+str(get_current_site(request))
-                    return Response(current_site)
                     email_subject='Activate your account'
                     email=request.data['email']
                     to_email=email
