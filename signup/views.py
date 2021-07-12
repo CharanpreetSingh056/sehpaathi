@@ -97,7 +97,7 @@ def signup_data(request):
                     return Response("Reached here")
                     from_email=settings.EMAIL_HOST_USER
                     current_site=current_site+'/validation/'
-                    current_site=current_site+token+'/'
+                    current_site=current_site+random_string+'/'
                     message='Hello, in order to activate your account, click on this link '+current_site
                     send_mail(email_subject,message,from_email,[to_email,])
                     #to_send_mail(random_string,request.data['email'],current_site)
