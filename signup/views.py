@@ -96,10 +96,10 @@ def signup_data(request):
                         return Response(response)
 
                 except:
-
                     all_chars=string.ascii_letters + string.digits
                     random_string=''.join(random.choices(all_chars, k=20))
                     current_site='/'+str(get_current_site(request))
+                    return Response("HERE")
                     to_send_mail(random_string,request.data['email'],current_site)
                     new_validation=user_validation(name=request.data['name'],email=request.data['email'],phone=request.data['phone'],password=request.data['password'],grad_year=request.data['grad_year'],course=request.data['course'],token=random_string)
                     new_validation.save()
