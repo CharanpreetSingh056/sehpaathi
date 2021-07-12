@@ -17,9 +17,7 @@ from validate_email import validate_email
 
 # Create your views here.
 def to_send_mail(token,email,current_site):
-
-
-
+    return
 
 
 def send_email_passwordchange(token,email,current_site):
