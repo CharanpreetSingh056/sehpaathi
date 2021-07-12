@@ -83,8 +83,7 @@ def signup_data(request):
         except:
             try:
                 try:
-
-                    does_exist=user_validation.objects.get(email=email)
+                    does_exist=user_validation.objects.get(email=request.data['email'])
                     if does_exist is not None:
                         random_string=does_exist.token
                         current_site='/'+str(get_current_site(request))
