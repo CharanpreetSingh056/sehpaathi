@@ -108,7 +108,6 @@ def update_question(request,pk):
                 }
             return Response(response)
         else:
-
             question.question=request.data['question']
             question.company=request.data['company']
             question.year=request.data['year']

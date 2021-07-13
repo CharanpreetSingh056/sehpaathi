@@ -61,7 +61,6 @@ def change_password(request):
             user=User.objects.get(email=request.user)
             account.password=new_password
             user.password=make_password(new_password) # for encrypting the password.
-
             account.save()
             user.save()
             response = {
