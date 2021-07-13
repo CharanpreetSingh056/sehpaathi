@@ -196,6 +196,7 @@ def forgot_password(request):
                     'status code' : status.HTTP_200_OK,
                     'message': 'Check your E-mail to confirm the password change.',
                     }
+                    
                 return Response(response)
 
         except:
