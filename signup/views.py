@@ -18,22 +18,25 @@ from validate_email import validate_email
 # Create your views here.
 def to_send_mail(token,email,current_site):
     to_email=email
+    email_subject="validate your account."
     from_email=settings.EMAIL_HOST_USER
     current_site=current_site+'/validation/'
     current_site=current_site+token+'/'
     message='Hello, in order to activate your account, click on this link '+current_site
     send_mail(email_subject,message,from_email,[to_email,])
+    return
 
 
 def send_email_passwordchange(token,email,current_site):
 
-    email_subject='Confirm your password change.'
+    email_subject="Confirm your password change."
     to_email=email
     from_email=settings.EMAIL_HOST_USER
     current_site=current_site+'/forgot_password_validate/'
     current_site=current_site+token+'/'
     message='Hello, in order to reset your password, click on this link '+current_site
     send_mail(email_subject,message,from_email,[to_email,])
+
 
 
 @api_view(['GET'])
@@ -61,7 +64,6 @@ def signup_data(request):
         serializer=UserdataSerializer(data=request.data)
         # check if it is an iiitl email.
         is_valid = validate_email(email_address=request.data['email'], check_format=True, check_blacklist=True, check_dns=True, dns_timeout=10, check_smtp=True, smtp_timeout=10, smtp_helo_host='my.host.name', smtp_from_address='my@from.addr.ess', smtp_debug=False)
-        print(is_valid)
         if is_valid==False:
             response = {
             'success' : 'False',
@@ -91,7 +93,6 @@ def signup_data(request):
                         'message': 'Check your E-mail to complete the signup.',
                         }
                         return Response(response)
-
                 except:
                     all_chars=string.ascii_letters + string.digits
                     random_string=''.join(random.choices(all_chars, k=20))
@@ -99,16 +100,12 @@ def signup_data(request):
                     to_send_mail(random_string,request.data['email'],current_site)
                     new_validation=user_validation(name=request.data['name'],email=request.data['email'],phone=request.data['phone'],password=request.data['password'],grad_year=request.data['grad_year'],course=request.data['course'],token=random_string)
                     new_validation.save()
-                    return Response("Reached HEre")
                     response = {
                         'success' : 'True',
                         'status code' : status.HTTP_200_OK,
                         'message': 'Check your E-mail to complete the signup.',
                         }
-                    all_to_chck=user_validation.objects.all()
-                    serializer=UserValidateSerializer(all_to_chck,many=True)
-                    return Response(serializer.data)
-
+                    return Response(response)
             except:
                 response = {
                         'success' : 'False',
