@@ -120,11 +120,11 @@ WSGI_APPLICATION = 'sehpaathi.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': config('DATABASE_NAME'),
-        'HOST': config('DATABASE_HOST'),
-        'PORT': '3306',
-        'USER': config('DATABASE_USER'),
-        'PASSWORD': config('DATABASE_PASSWORD'),
+        #'NAME': config('DATABASE_NAME'),
+        #'HOST': config('DATABASE_HOST'),
+        #'PORT': '3306',
+        #'USER': config('DATABASE_USER'),
+        #'PASSWORD': config('DATABASE_PASSWORD'),
     }
 }
 
